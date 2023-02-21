@@ -2,7 +2,6 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import Header from './components/Header/index';
 import { DefaultTheme } from 'styled-components';
-import Container from './components/shared/Container';
 
 
 const theme: DefaultTheme = {
@@ -37,12 +36,10 @@ const theme: DefaultTheme = {
   }
 }
 
-function App() {
+const App: React.FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Container>
-        <Header />
-      </Container>
+      <Header />
     </ThemeProvider>
   );
 }
