@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ThemeColor } from '../../types';
-import { getColor, getPresedColor } from './../../helpers';
+import { getColor, getPresedColor } from '../../helpers';
 
 interface ButtonProps {
     $variant?: 'outlined' | 'normal';
