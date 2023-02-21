@@ -1,13 +1,61 @@
+@import-normalize;
+
+@font-face {
+  font-family: 'Nekst';
+  src: url('./fonts/Nekst-Black.eot');
+  src: local('Nekst Black'), local('Nekst-Black'),
+    url('./fonts/Nekst-Black.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/Nekst-Black.woff2') format('woff2'),
+    url('./fonts/Nekst-Black.woff') format('woff'),
+    url('./fonts/Nekst-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./fonts/Gilroy-Regular.eot');
+  src: local('Gilroy Regular'), local('Gilroy-Regular'),
+    url('./fonts/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/Gilroy-Regular.woff') format('woff'),
+    url('./fonts/Gilroy-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy bold';
+  src: url('./fonts/Gilroy-Bold.eot');
+  src: local('Gilroy Bold'), local('Gilroy-Bold'),
+    url('./fonts/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/Gilroy-Bold.woff') format('woff'),
+    url('./fonts/Gilroy-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+html,
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  min-width: 320px;
+  max-width: 100vw;
+  min-height: 100vh;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    font-size: 14px;
+  }
 }
