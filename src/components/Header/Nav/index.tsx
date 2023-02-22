@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import Container from '../shared/Container';
-import Button from '../shared/Button';
-import Link from '../shared/Link';
-import Layer from '../shared/Layer';
+import Container from '../../shared/Container';
+import Button from '../../shared/Button';
+import Link from '../../shared/Link';
+import Layer from '../../shared/Layer';
 
-import logo from '../../assets/logo.png';
-import logoDesk from '../../assets/logo_desk.png';
-import burger from '../../assets/burger.png';
-import burgerMobile from '../../assets/burger_mobile.png';
-import close from '../../assets/close.png';
+import logo from '../../../assets/logo.png';
+import logoDesk from '../../../assets/logo_desk.png';
+import burger from '../../../assets/burger.png';
+import burgerMobile from '../../../assets/burger_mobile.png';
+import close from '../../../assets/close.png';
 
 
 const MenuContainer = styled(Container)`
@@ -27,6 +27,7 @@ const StyledNav = styled.nav<{ active: boolean }>`
     width: 100%;
     background-color: ${props => props.active ? 'white' : 'transparent'};
     padding: 24px 0;
+    z-index: 2;
     @media (max-width: 1439px) {
         padding: 24px 0 21px;
     };
@@ -166,7 +167,7 @@ const Nav: React.FC<{}> = () => {
     const [sticky, setSticky] = useState(false);
     const [isMobile, setIsMobile] = useState(MQ.matches);
     const [isTablet, setIsTablet] = useState(MQTablet.matches);
-    const [menuOpen, setMenuOpen] = useState(isTablet ? false : true);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [subMenuOpened, setSubMenuOpened] = useState<number | null>(null);
 
     useEffect(() => {
