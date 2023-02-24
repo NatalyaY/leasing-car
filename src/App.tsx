@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import Header from './components/Header/index';
 import { DefaultTheme } from 'styled-components';
+import Form from './components/Form/index';
 
 
 const theme: DefaultTheme = {
@@ -40,6 +41,7 @@ const App: React.FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
+      <Form />
     </ThemeProvider>
   );
 }

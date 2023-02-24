@@ -44,6 +44,7 @@ export default styled.button<ButtonProps>`
     padding: ${props => props.$size === 'large' ? '14px 52px 18px' : '12px 24px'};
     font-size: ${props => props.$size === 'large' ? '30px' : '16px'};
     font-family: ${props => props.$font && props.$font + ', sans-serif'};
+    line-height: 1.5;
     ${props => props.$size === 'large' && '@media (max-width: 768px) {font-size: 22px}'}
     ${props =>
         props.$variant === 'outlined' ?

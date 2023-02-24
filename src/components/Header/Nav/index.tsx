@@ -26,16 +26,18 @@ const StyledNav = styled.nav<{ active: boolean }>`
     left: 0;
     width: 100%;
     background-color: ${props => props.active ? 'white' : 'transparent'};
-    padding: 24px 0;
+    padding: 21px 0;
+    box-shadow: ${props => props.active ? '0px 4px 44px rgba(0, 0, 0, 0.1)' : 'none'};
     z-index: 2;
+    transition: padding .2s, box-shadow .2s;
     @media (max-width: 1439px) {
         padding: 24px 0 21px;
     };
     @media (max-width: 1023px) {
-        padding: 16px;
+        padding: 24px 0;
     };
     @media (max-width: 767px) {
-        padding: 19px 0 8px;
+        padding: ${props => props.active ? '19px 0' : '19px 0 8px'};
     };
 `;
 
@@ -57,6 +59,7 @@ const Menu = styled.div<{ open?: boolean, isTablet: boolean; }>`
     flex: 1;
     transition: transform .4s;
     max-width: max(260px, 60%);
+    z-index: 2;
     ${props => props.isTablet && `
         flex-direction: column;
         height: 100%;
@@ -210,7 +213,7 @@ const Nav: React.FC<{}> = () => {
                     isTablet &&
                     <Burger
                         onClick={() => setMenuOpen(true)}
-                        src={isMobile ? burgerMobile : burger}
+                        src={sticky ? burger : burgerMobile}
                         alt="Открыть меню"
                     />
                 }

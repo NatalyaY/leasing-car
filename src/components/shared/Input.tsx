@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import check from '../../assets/check.png';
+import { IMaskInput } from 'react-imask';
 
 const wrapperBase = css<{ disabled?: boolean }>`
     --px: 24px;
     position: relative;
     ${({ disabled }) => disabled && 'opacity: .4'};
     color: ${({ theme }) => theme.pallete.secondary.main};
-    width: fit-content;
+    max-width: 100%;
     transition: .2s;
 `
 
@@ -22,6 +23,8 @@ const InputBase = styled.input`
     transition: inherit;
     border-radius: ${({ theme }) => theme.radius.small};
     background-color: ${({ theme }) => theme.pallete.secondary.light};
+    max-width: 100%;
+    width: 100%;
 `;
 
 
@@ -34,9 +37,25 @@ const InputWrapper = styled.div<{ disabled?: boolean }>`
     font-size: 16px;
 `
 
-const Input = styled(InputBase) <{ error: boolean }>`
+const Placeholder = styled.span`
     padding-top: 24px;
     padding-bottom: 8px;
+    padding-left: var(--px);
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.4;
+`
+
+const Input = styled(InputBase)<{ error: boolean }>`
+    padding-top: 24px;
+    padding-bottom: 8px;
+    &:not(:active):not(:focus) ~ ${Placeholder} {
+        color: transparent;
+    };
     &:hover:not([disabled]) {
         background-color: ${({ theme }) => theme.pallete.secondary.dark};
     };
@@ -74,12 +93,13 @@ const fadeIn = css<{ visible: boolean }>`
     transition: .3s;
 `
 
-const ErrorMessage = styled.span<{ visible: boolean }>`
+export const ErrorMessage = styled.span<{ visible: boolean }>`
     position: absolute;
     bottom: -4px;
     left: 0;
     font-family: 'Gilroy', sans-serif;
     color: ${props => props.theme.pallete.error.main};
+    width: max-content;
     transform: ${props => props.visible ? 'translateY(100%)' : 'translateY(70%)'};
     ${fadeIn}
 `
@@ -212,21 +232,30 @@ const ValueLabel = styled.span<{ valueLabel: string }>`
 
 
 interface LabeledInputProps {
+    value: number | string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     label?: string;
     disabled?: boolean;
     validated?: boolean;
     errorText?: string;
+    placeholder?: string;
+    component?: any;
+    inputProps?: React.InputHTMLAttributes<HTMLInputElement>
 }
 
-export const LabeledInput: React.FC<LabeledInputProps> = ({ label, disabled, errorText, validated }) => {
+export const LabeledInput: React.FC<LabeledInputProps> = ({ inputProps, component, value, onChange, label, disabled, errorText, placeholder, validated }) => {
     return (
         <InputWrapper disabled={disabled}>
-            <Input id={label} error={!validated && errorText?.trim() ? true : false} placeholder=' ' />
+            <Input {...inputProps} as={component} value={value} onChange={onChange} id={label} error={!validated && errorText?.trim() ? true : false} placeholder={' '} />
             <InputLabel htmlFor={label}>{label}</InputLabel>
             <ErrorMessage visible={!validated && errorText?.trim() ? true : false}>{errorText}</ErrorMessage>
             <SuccessIcon visible={validated || false}>
                 <img src={check} alt='Поле заполнено верно' />
             </SuccessIcon>
+            {
+                placeholder &&
+                <Placeholder>{placeholder}</Placeholder>
+            }
         </InputWrapper>
     )
 }
@@ -241,7 +270,7 @@ interface RangedInputProps {
     labelBackground?: boolean,
     smallLabel?: boolean,
     valueLabel?: string,
-    onChange: (e: React.ChangeEvent) => void
+    onChange: (e: React.ChangeEvent) => void,
 }
 
 export const RangedInput: React.FC<RangedInputProps> = (props) => {
@@ -319,3 +348,27 @@ export const RangedInput: React.FC<RangedInputProps> = (props) => {
         </InputRangeWrapper>
     )
 }
+
+interface PhoneMaskedInputProps {
+    onChange: (event: { target: { value: string } }, completed?: boolean, masked?: any) => void;
+    className: string;
+    error: boolean;
+}
+
+export const PhoneMaskedInput = React.forwardRef<HTMLInputElement, PhoneMaskedInputProps>(
+    (props, ref) => {
+        const { onChange, error, ...other } = props;
+        return (
+            <IMaskInput
+                {...other}
+                mask="{+7} (000) 000 00 00"
+                unmask={true}
+                eager={false}
+                inputRef={ref}
+                onAccept={(value: any, mask) => {
+                    onChange({ target: { value: value } }, mask.masked.isComplete, mask.value);
+                }}
+            />
+        );
+    },
+);

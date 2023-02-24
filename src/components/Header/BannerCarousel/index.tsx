@@ -41,6 +41,7 @@ const BannerCarouselStyled = styled.div<{ activeBanner: number }>`
     transition: transform .5s;
     transform: translateX(${props => props.activeBanner * -100}%);
     will-change: transform;
+    touch-action: none;
 `
 
 const DotContainer = styled.div`

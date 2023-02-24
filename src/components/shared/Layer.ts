@@ -8,4 +8,5 @@ export default styled.div`
     height: 100%;
     background-color: black;
     opacity: .5;
+    z-index: 2;
 `

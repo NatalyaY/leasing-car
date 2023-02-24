@@ -94,17 +94,15 @@ const BannerImg = styled.img`
     };
 `;
 
-interface Banner {
-    background: string;
-    title: string;
-    subtitle?: string;
-    buttonText: string;
-    img?: string;
-    textPosition?: string;
-};
-
 interface Props {
-    banner: Banner;
+    banner: {
+        background: string;
+        title: string;
+        subtitle?: string;
+        buttonText: string;
+        img?: string;
+        textPosition?: string;
+    };
 };
 
 const Banner: React.FC<Props> = ({ banner }) => {
@@ -120,7 +118,7 @@ const Banner: React.FC<Props> = ({ banner }) => {
                     banner.subtitle &&
                     <Subtitle>{banner.subtitle}</Subtitle>
                 }
-                <Button>{banner.buttonText}</Button>
+                <Button $font='Gilroy bold'>{banner.buttonText}</Button>
             </BannerContent>
         </BannerContainer>
     );
