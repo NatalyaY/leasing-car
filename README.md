@@ -1,4 +1,4 @@
-# Leasing Car (React, styled-components) [(live version)](https://natalyay.github.io/cat-energy/)
+# Leasing Car (React, styled-components)
 Лендинг по лизингу автомобилей с автоматической каруселью кастомизируемых баннеров и нестандартной стилизацией полей формы. Отправка заявок с сайта в Telegram через бота. React, TypeScript, styled-components.
 ## Что интересного:   
 :white_check_mark: конструктор баннеров и автоматическая карусель    
